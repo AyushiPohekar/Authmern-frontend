@@ -1,9 +1,9 @@
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
-
+import PasswordReset from "./components/PasswordReset";
 import Dashboard from "./components/Dashboard";
-
+import ForgotPassword from "./components/ForgotPassword";
 import Error from "./components/Error";
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -26,7 +26,7 @@ function App() {
   const DashboardValid = async () => {
     let token = localStorage.getItem("usersdatatoken");
 
-    const res = await fetch("/validuser", {
+    const res = await fetch("http://localhost:8009/validuser", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -37,11 +37,11 @@ function App() {
     const data = await res.json();
 
     if (data.status == 401 || !data) {
-      console.log("user not valid");
+      // console.log("user not valid");
     } else {
       console.log("user verify");
       setLoginData(data)
-      history("/dash");
+      history("http://localhost:8009/dash");
     }
   }
 
@@ -64,6 +64,8 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/dash" element={<Dashboard />} />
               <Route path="*" element={<Error />} />
+              <Route path="/password-reset" element={<PasswordReset />} />
+              <Route path="/forgotpassword/:id/:token" element={<ForgotPassword />} />
             </Routes>
           </>
 

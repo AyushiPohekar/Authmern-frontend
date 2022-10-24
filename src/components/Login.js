@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import "./mix.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [passShow, setPassShow] = useState(false);
   const [inpval, setInpval] = useState({
     email: "",
     password: "",
- });
- const history=useNavigate();
-const setVal = (e) => {
+  });
+  const history = useNavigate();
+  const setVal = (e) => {
     // console.log(e.target.value)
     const { name, value } = e.target;
 
@@ -22,10 +23,28 @@ const setVal = (e) => {
     });
   };
 
-  const loginuser=async(e)=>{
+  const loginuser = async (e) => {
     e.preventDefault();
 
-    const {email,password}=inpval;
+    const { email, password } = inpval;
+
+    // if (email === "") {
+    //   toast.error("email is required!", {
+    //     position: "top-center",
+    //   });
+    // } else if (!email.includes("@")) {
+    //   toast.warning("includes @ in your email!", {
+    //     position: "top-center",
+    //   });
+    // } else if (password === "") {
+    //   toast.error("password is required!", {
+    //     position: "top-center",
+    //   });
+    // } else if (password.length < 6) {
+    //   toast.error("password must be 6 char!", {
+    //     position: "top-center",
+    //   });
+    // }
      if (email === "") {
         alert("please enter your email");
       } else if (!email.includes("@")) {
@@ -34,30 +53,29 @@ const setVal = (e) => {
         alert("Enter your password");
       } else if (password.length < 6) {
         alert("password must be 6 characters");
-      }else{
-        //console.log("user Login succesful");
-        const data = await fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                 email, password
-            })
-        });
+      }
+    else {
+      //console.log("user Login succesful");
+      const data = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-        const res=await data.json();
-        //console.log(res);
-        if(res.status==201){
-          
-          localStorage.setItem("usersdatatoken",res.result.token);
-          history("/dash");
-            setInpval({...inpval,email:"",password:""})
-        }
-    
+      const res = await data.json();
+      //console.log(res);
+      if (res.status == 201) {
+        localStorage.setItem("usersdatatoken", res.result.token);
+        history("/dash");
+        setInpval({ ...inpval, email: "", password: "" });
+      }
     }
-     
-  }
+  };
 
   return (
     <>
@@ -77,7 +95,6 @@ const setVal = (e) => {
                 placeholder="Enter your email address"
                 onChange={setVal}
                 value={inpval.email}
-               
               ></input>
             </div>
             <div className="form_input">
@@ -90,7 +107,6 @@ const setVal = (e) => {
                   placeholder="Enter your password "
                   onChange={setVal}
                   value={inpval.password}
-                 
                 ></input>
                 <div
                   className="showpass"
@@ -100,11 +116,18 @@ const setVal = (e) => {
                 </div>
               </div>
             </div>
-            <button className="btn" onClick={loginuser}> Login</button>
+            <button className="btn" onClick={loginuser}>
+              
+              Login
+            </button>
             <p>
               Don't have an Account?<NavLink to="/register">Sign Up</NavLink>
             </p>
+            <p style={{ color: "black", fontWeight: "bold" }}>
+              Forgot Password<NavLink to="/password-reset">Click here</NavLink>
+            </p>
           </form>
+          <ToastContainer />
         </div>
       </section>
     </>
