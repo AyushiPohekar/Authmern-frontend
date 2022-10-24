@@ -158,7 +158,8 @@ import React, { useState } from 'react'
 import { NavLink } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./mix.css"
+import "./mix.css";
+import { API } from "./global"
 
 const Register = () => {
 
@@ -227,7 +228,7 @@ const Register = () => {
             // console.log("user registration succesfully done");
 
 
-            const data = await fetch("/register", {
+            const data = await fetch('/register', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -238,7 +239,7 @@ const Register = () => {
             });
 
             const res = await data.json();
-            // console.log(res.status);
+          console.log(res.status);
 
             if (res.status === 201) {
                 toast.success("Registration Successfully done 😃!", {

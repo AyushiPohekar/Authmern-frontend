@@ -5,7 +5,7 @@ import PasswordReset from "./components/PasswordReset";
 import Dashboard from "./components/Dashboard";
 import ForgotPassword from "./components/ForgotPassword";
 import Error from "./components/Error";
-
+import { API } from "./components/global";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { Routes, Route, useNavigate } from "react-router-dom"
@@ -26,11 +26,12 @@ function App() {
   const DashboardValid = async () => {
     let token = localStorage.getItem("usersdatatoken");
 
-    const res = await fetch("/validuser", {
+    const res = await fetch(`/validuser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token
+        "Authorization": token,
+        
       }
     });
 
@@ -41,7 +42,7 @@ function App() {
     } else {
       console.log("user verify");
       setLoginData(data)
-      history("/dash");
+      history(`/dash`);
     }
   }
 
@@ -81,3 +82,6 @@ function App() {
 }
 
 export default App;
+
+
+

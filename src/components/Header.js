@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useContext } from "react";
 import { LoginContext } from "./ContextProvider/Context";
-
+import { API } from "./global";
 import Avatar from "@mui/material/Avatar";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const Header = () => {
   const logoutuser = async () => {
     let token = localStorage.getItem("usersdatatoken");
 
-    const res = await fetch("/logout", {
+    const res = await fetch('/logout', {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

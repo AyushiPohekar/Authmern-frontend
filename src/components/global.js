@@ -1,0 +1,1 @@
+export const API="https://authentication-app.onrender.com"

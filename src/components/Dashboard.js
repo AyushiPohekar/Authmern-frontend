@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./ContextProvider/Context";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { API } from "./global";
 
 const Dashboard = () => {
   const { logindata, setLoginData } = useContext(LoginContext);
@@ -12,7 +13,7 @@ const Dashboard = () => {
   const DashboardValid = async () => {
     let token = localStorage.getItem("usersdatatoken");
 
-    const res = await fetch("/validuser", {
+    const res = await fetch(`/validuser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

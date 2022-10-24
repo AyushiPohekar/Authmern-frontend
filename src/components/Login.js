@@ -3,6 +3,7 @@ import "./mix.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { API } from "./global";
 
 const Login = () => {
   const [passShow, setPassShow] = useState(false);
@@ -56,7 +57,7 @@ const Login = () => {
       }
     else {
       //console.log("user Login succesful");
-      const data = await fetch("/login", {
+      const data = await fetch('/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

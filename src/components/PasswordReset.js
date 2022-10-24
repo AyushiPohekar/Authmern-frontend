@@ -73,6 +73,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
+import { API } from "./global";
 
 
 const PasswordReset = () => {
@@ -96,7 +97,7 @@ const PasswordReset = () => {
         position: "top-center",
       });
     } else {
-      const res = await fetch("/sendpasswordlink", {
+      const res = await fetch('/sendpasswordlink', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
