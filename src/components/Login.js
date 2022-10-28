@@ -57,7 +57,7 @@ const Login = () => {
       }
     else {
       //console.log("user Login succesful");
-      const data = await fetch('/login', {
+      const data = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

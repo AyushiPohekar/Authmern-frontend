@@ -159,7 +159,6 @@ import { NavLink } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./mix.css";
-import { API } from "./global"
 
 const Register = () => {
 
@@ -228,7 +227,7 @@ const Register = () => {
             // console.log("user registration succesfully done");
 
 
-            const data = await fetch('/register', {
+            const data = await fetch(`${process.env.REACT_APP_BASE_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
